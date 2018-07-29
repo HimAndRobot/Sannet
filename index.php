@@ -4,9 +4,8 @@ require 'vendor/autoload.php';
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-
-
-$app = new \Slim\app();
+use \Slim\app();
+$app = new app();
 $container = $app->getContainer();
 $container['view'] = function ($container) {
 	 $view = new \Slim\Views\Twig('view');
