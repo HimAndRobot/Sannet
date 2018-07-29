@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sannet Controle</title>
+	<link rel="stylesheet" type="text/css" href="public/bootstrap.min.css">	
+	<style type="text/css">
+		.form_login{
+			background-color: white;
+			padding: 20px 35px 28px 35px;
+			border-radius: 3px;
+		}
+		.col-center{
+			height:100vh;
+		}
+		body{
+			background-color:#00CCEE;
+		}
+	</style>	
+</head>
+
+<body>
+<div class='container col-center'>
+	<div class='row h-100'>
+		<div class='col-5 my-auto mx-auto'>
+			<form class='form_login' onsubmit="validate_login_form(event)" action="{{url_validate}}">
+				<div class='form-group'>
+					<label for='user_login:'>Login</label>
+					<input placeholder="Escreva aqui seu login" class='form-control' id='user_login' type="text" name="user_login">
+				</div>
+				<div class='form-group'>
+					<label for='user_password:'>Senha</label>
+					<input class='form-control' id='user_password' type="password" name="user_password">
+					<small class='form-text text-muted'>Não compartilhe sua senha.</small>
+				</div>
+				<button type="submit" class='btn btn-primary'>Entrar</button>
+
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function validate_login_form(){
+		var login_camp = document.getElementById('user_login');
+		var password_camp = document.getElementById('user_password');
+		if(login_camp.value == '' || password_camp.value == ''){
+			alert('Por favor preencha  seu login e sua senha');
+			event.preventDefault();
+		}
+	}
+</script>
+</body>
+</html>
