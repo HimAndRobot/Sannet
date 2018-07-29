@@ -1,26 +1,25 @@
 <?php
 
 require 'vendor/autoload.php';
-
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
-use \Slim\app;
+use \Slim\App;
 $app = new app();
 $container = $app->getContainer();
-$container['view'] = function ($container) {
-	 $view = new \Slim\Views\Twig('view');
-    return $view;
-};
+//denpendecy config load
+include('config.php');
+//denpendecy inject load
+include('dependecy.php');
+//models load
+include('models.php');
+//controllers load
+include('controllers.php');
+include('middleware.php');
 
 
-$container['LoginController'] = function($c){
-	$view = $c->get('view');
-	$router = $c->get('router');
-	return new \Conts\login($view,$router);
-};
-
-
-$app->get('/','LoginController:index');
-$app->get('/login/validate','LoginController:validate')->setName('validate');
+$app->get('/','LoginController:index')->setName('home')->add($userNotLogged);
+$app->get('/login/error/{msg}','LoginController:error')->setName('login_error')->add($userNotLogged);
+$app->post('/login/validate','LoginController:validate')->setName('validate');
+$app->get('/painel',function(){
+	echo "aqui ficara o painel";
+})->setName('painel');
 
 $app->run();
